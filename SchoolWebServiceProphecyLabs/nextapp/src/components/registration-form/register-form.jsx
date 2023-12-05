@@ -5,6 +5,7 @@ import Button from "@/components/Button/button.jsx";
 import styles from "./register-form.module.css";
 import Label from "@/components/Label/label.jsx";
 
+
 export default function RegForm(props) {
     const {
         register,
@@ -15,7 +16,7 @@ export default function RegForm(props) {
 
     const onSubmit = (data) => {
         console.log(data);
-        fetch('/Home/Register/', { 
+        fetch('/Home/Register/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

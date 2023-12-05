@@ -1,0 +1,43 @@
+.header {
+    margin-left: -8px;
+    margin-top: -18px;
+    width: 100vw;
+    height: 100px;
+    background: #2E393D;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__ul {
+    margin: 0 0 0 270px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.header__li {
+    cursor: pointer;
+    color: #CCCDCF;
+    font-family: Gunterz;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.header__li:not(:last-child) {
+    margin-right: 120px;
+}
+
+.btn__logout {
+    margin-right: 50px;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

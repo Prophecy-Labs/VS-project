@@ -4,6 +4,8 @@ import {useForm} from "react-hook-form";
 import Button from "@/components/Button/button.jsx";
 import styles from "./teacher-login.module.css";
 import Label from "@/components/Label/label.jsx";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm(props) {
     const {
@@ -12,7 +14,7 @@ export default function LoginForm(props) {
         watch,
         formState: { errors },
     } = useForm()
-
+    const router = useRouter();
     const onSubmit = (data) => {
         console.log(data);
         fetch('/Home/LogIn/', {
@@ -23,7 +25,12 @@ export default function LoginForm(props) {
             body: JSON.stringify(data)
         })
             .then(response => response.text())
-            .then(data => console.log(data));
+            .then(data => {
+                console.log(data)
+                if (data == "successful") {
+                    router.push('/main-page');
+                } 
+            });
     };
 
     return (

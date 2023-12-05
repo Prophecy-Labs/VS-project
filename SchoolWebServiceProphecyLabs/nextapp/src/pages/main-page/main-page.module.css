@@ -1,0 +1,6 @@
+.container {
+    margin: 5% 11%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
