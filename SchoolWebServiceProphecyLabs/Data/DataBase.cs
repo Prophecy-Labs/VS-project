@@ -5,13 +5,13 @@ namespace SchoolWebServiceProphecyLabs.Data
 {
     public class DataBase
     {
-        public static SqlConnection SqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=X:\VS projects\SchoolWebServiceProphecyLabs\SchoolWebServiceProphecyLabs\Data\Database1.mdf;Integrated Security=True");
+        public static SqlConnection SqlConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=X:\VS projects\SchoolWebServiceProphecyLabs\SchoolWebServiceProphecyLabs\Data\db.mdf;Integrated Security=True");
 
         public string Insert(string login, string email, string password) {
             if (Find(login))
                 return "User already exist";
             string result = "Something goes wrong";
-            string qs = $"insert into Users(login,password,email) values ('{login}','{password}','{email}')";
+            string qs = $"insert into Users(user_login,passwordHashCode,email) values ('{login}','{password}','{email}')";
             SqlCommand cmd = new SqlCommand(qs, SqlConnection);
             SqlConnection.Open();
             if (cmd.ExecuteNonQuery() == 1)
@@ -22,7 +22,7 @@ namespace SchoolWebServiceProphecyLabs.Data
 
         public string Login(string login, string password) {
             string result = "user doesnt exist";
-            string qs = $"SELECT * FROM Users WHERE login = '{login}';";
+            string qs = $"SELECT * FROM Users WHERE user_login = '{login}';";
             SqlCommand cmd = new SqlCommand(qs, SqlConnection);
             SqlConnection.Open();
             SqlDataReader reader = cmd.ExecuteReader();
@@ -40,7 +40,7 @@ namespace SchoolWebServiceProphecyLabs.Data
 
         public bool Find(string login) {
             bool result = false;
-            SqlCommand cmd = new SqlCommand($"SELECT * FROM Users WHERE login = '{login}';", SqlConnection);
+            SqlCommand cmd = new SqlCommand($"SELECT * FROM Users WHERE user_login = '{login}';", SqlConnection);
             SqlConnection.Open();
             if (cmd.ExecuteReader().HasRows)
                 result = true;

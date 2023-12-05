@@ -194,7 +194,7 @@ UpgradeLog*.XML
 UpgradeLog*.htm
 
 # SQL Server files
-*.mdf
+
 *.ldf
 
 # Business Intelligence projects
@@ -230,3 +230,4 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
