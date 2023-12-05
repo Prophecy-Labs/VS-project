@@ -1,0 +1,14 @@
+@font-face {
+    font-family: NokiaKokia;
+    src: url('../../../fonts/NokiaKokia(RYS BY LYAJKA).ttf');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+.form__label {
+    font-family: NokiaKokia;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 15px;
+}

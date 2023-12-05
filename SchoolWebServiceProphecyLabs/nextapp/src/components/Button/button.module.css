@@ -1,0 +1,25 @@
+.btn_reset {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    user-select: none;
+}
+
+@font-face {
+    font-family: NokiaKokia;
+    src: url('../../../fonts/NokiaKokia(RYS BY LYAJKA).ttf');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+.register_btn {
+    padding: 27px 78px;
+    background-color: #2E393D;
+    color: #fff;
+    font-family: NokiaKokia;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 15px;
+}
