@@ -5,6 +5,7 @@ const rewrites = () => {
             source: "/Home/:path*",
             destination: "http://localhost:5136/Home/:path*", 
         },
+       
     ];
 }; 
 

@@ -31,7 +31,7 @@ namespace SchoolWebServiceProphecyLabs.Controllers
         [HttpPost]
         public IActionResult Register([FromBody] Userdata data) 
         {        
-            return Ok(dataBase.Insert(data.login,data.email,data.password));
+            return Ok(dataBase.InsertUser(data.login,data.email,data.password));
         }
 
         [HttpPost]
