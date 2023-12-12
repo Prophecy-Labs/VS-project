@@ -15,6 +15,16 @@
     "static/chunks/main-app.js"
   ],
   "pages": {
+    "/Lobby/student/[params]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Lobby/student/[params].js"
+    ],
+    "/Lobby/teacher/[code]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Lobby/teacher/[code].js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -24,11 +34,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
-    ],
-    "/main-page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/main-page.js"
     ]
   },
   "ampFirstPages": []

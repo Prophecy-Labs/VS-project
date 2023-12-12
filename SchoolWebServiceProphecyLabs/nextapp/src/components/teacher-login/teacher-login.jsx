@@ -28,7 +28,7 @@ export default function LoginForm(props) {
             .then(data => {
                 console.log(data)
                 if (data == "successful") {
-                    router.push('/main-page');
+                    router.push('/main-page/main-page');
                 } 
             });
     };

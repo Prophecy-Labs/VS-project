@@ -1,6 +1,8 @@
 .container {
-    margin: 5% 11%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    margin: 5% 5%;
+    display: grid;
+    justify-content: center; 
+    grid-auto-flow: row dense;
+    column-gap: 115px;
+    grid-template-columns: repeat(auto-fill, 410px);
 }

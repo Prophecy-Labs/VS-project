@@ -4,6 +4,9 @@ import styles from './header.module.css';
 export default function Header() {
     return (
         <div className={styles.header}>
+            <button className={styles['new-game__btn']}>
+                <span className={styles['span-btn']}>новая игра</span>
+            </button>
             <ul className={styles.header__ul}>
                 <li className={styles.header__li}><a>история</a></li>
                 <li className={styles.header__li}><a>игры</a></li>

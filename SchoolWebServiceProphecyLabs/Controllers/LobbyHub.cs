@@ -1,39 +1,27 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
-
-public class Team
+namespace SchoolWebServiceProphecyLabs.SignalR
 {
-    public string Code { get; set; }
-    public List<string> Clients { get; set; }
-}
 
-public class LobbyHub : Hub
-{
-    private static Dictionary<string, Team> Teams = new Dictionary<string, Team>();
 
-    public string CreateTeam()
+    public class Team
     {
-        var teamCode = GenerateTeamCode(5);
-        Teams[teamCode] = new Team { Code = teamCode, Clients = new List<string>() };
-        return teamCode;
+        public string Code { get; set; }
+        public List<string> Clients { get; set; }
     }
 
-    public bool JoinTeam(string teamCode, string clientId)
+    public class LobbyHub : Hub
     {
-        if (Teams.ContainsKey(teamCode))
+        public async Task JoinTeam(string teamCode, string username)
         {
-            Teams[teamCode].Clients.Add(clientId);
-            return true;
+            await Groups.AddToGroupAsync(Context.ConnectionId, teamCode);
+            await Clients.All.SendAsync("Notify", $"{username} вошел в игру");
         }
-        return false;
-    }
 
-    private string GenerateTeamCode(int length)
-    {
-        var random = new Random();
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        return new string(Enumerable.Repeat(chars, length)
-          .Select(s => s[random.Next(s.Length)]).ToArray());
+        public async Task StartGame(string teamCode)
+        {
+            await Clients.Group(teamCode).SendAsync("Start Game");
+        }
     }
 }

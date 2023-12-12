@@ -5,39 +5,46 @@ import GameCard from "@/components/gameCard/gameCard";
 import Footer from "@/components/footer/footer";
 
 export default function MainPage() {
+
     return(
         <>
             <Header  />
-            <div className={styles.container}>
+            <div className={styles['container']}>
                 <GameCard
-                    gameName="тест"
-                    gameDescr="История 10В Реформы Александра Первого"
-                    image={require('../img/test.svg')}
+                    gameName="Своя игра"
+                    gameDescr="История 10г Первая мировая"
+                    image={require('../../img/jeopardy.svg')}
+                    gameType="test"
                 />
                 <GameCard
-                    gameName="тест"
-                    gameDescr="История 10В Реформы Александра Первого"
-                    image={require('../img/test.svg')}
+                    gameName="Слабое звено"
+                    gameDescr="Биология 6А Размножение"
+                    image={require('../../img/weak-link.svg')}
+                    gameType="weakLink"
                 />
                 <GameCard
-                    gameName="тест"
+                    gameName="тест 3"
                     gameDescr="История 10В Реформы Александра Первого"
-                    image={require('../img/test.svg')}
+                    image={require('../../img/test.svg')}
+                    gameType="test"
                 />
                 <GameCard
-                    gameName="тест"
+                    gameName="тест 4"
                     gameDescr="История 10В Реформы Александра Первого"
-                    image={require('../img/test.svg')}
+                    image={require('../../img/test.svg')}
+                    gameType="test"
                 />
                 <GameCard
-                    gameName="тест"
+                    gameName="тест 5"
                     gameDescr="История 10В Реформы Александра Первого"
-                    image={require('../img/test.svg')}
+                    image={require('../../img/test.svg')}
+                    gameType="test"
                 />
                 <GameCard
-                    gameName="тест"
+                    gameName="тест 6"
                     gameDescr="История 10В Реформы Александра Первого"
-                    image={require('../img/test.svg')}
+                    image={require('../../img/test.svg')}
+                    gameType="test"
                 />
             </div>
             <Footer />

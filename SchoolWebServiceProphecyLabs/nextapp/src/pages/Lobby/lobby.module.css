@@ -1,0 +1,30 @@
+@font-face {
+    font-family: NokiaKokia;
+    src: url('../../../fonts/NokiaKokia(RYS BY LYAJKA).ttf');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Gunterz;
+    src: url("../../../fonts/Gunterz-Medium.otf") format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Srbija Sans;
+    src: url("../../../fonts/Srbija Sans.woff2") format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+.container {
+    margin: 5% 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

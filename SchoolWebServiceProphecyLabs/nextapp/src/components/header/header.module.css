@@ -1,16 +1,49 @@
 .header {
-    margin-left: -8px;
-    margin-top: -18px;
-    width: 100vw;
+    z-index: 1000;
+    margin-left: auto;
+    width: 100%;
     height: 100px;
     background: #2E393D;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    border-radius: 30px;
+}
+
+.new-game__btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 13px;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 0px 0px 11px 11px;
+    background: #64DC97;
+    align-self: flex-start;
+}
+
+.plus-btn {
+    font-family: Gunterz;
+    color: #328053;
+    font-weight: 500;
+    font-size: 30px;
+    text-align: center;
+}
+
+.span-btn {
+    font-family: Gunterz;
+    padding-left: 40px;
+    color: #328053;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 175%;
+    background-image: url(../../img/plus.svg);
+    background-position: left;
+    background-repeat: no-repeat;
 }
 
 .header__ul {
-    margin: 0 0 0 270px;
     padding: 0;
     list-style: none;
     display: flex;

@@ -25,28 +25,36 @@
 .game__card {
     z-index: 0;
     position: relative;
-    padding: 25px 30px;
+    background-repeat: no-repeat;
+    padding: 22px 22px;
     user-select: none;
-    width: 24%;
-    height: 18%;
+    max-width: 350px;
+    height: 192px;
     background-color: #334850;
     border-radius: 40px;
     color: #DBEDF3;
     margin-bottom: 50px;
 }
 
-.game__card:not(:nth-child(-n+3)) {
-    margin-bottom: 0;
+.game__card1 {
+    background-image: url(../../img/background-card.svg);
 }
+
+.game__card2 {
+    background-image: url(../../img/background-card2.svg);
+}
+
 
 .game__name {
     z-index: 2;
     font-family: NokiaKokia;
     font-size: 32px;
     font-style: normal;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
     font-weight: 400;
     line-height: 40px;
     margin: 0 0 40px;
+    max-width: 150px;
 }
 
 .game__descr {
@@ -68,4 +76,52 @@
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+.game-hover__div {
+    z-index: 1000;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 40px;
+    background: rgba(51, 72, 80, 0.92);
+    width: 395px;
+    height: 236px;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.game__card:hover > .game-hover__div {
+    display: flex;
+}
+
+.hover__span {
+    color: #DBEDF3;
+    font-family: Gunterz;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 125%;
+}
+
+.top-icons {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.bottom-icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 70px;
+    cursor: pointer;
+    user-select: none;
 }

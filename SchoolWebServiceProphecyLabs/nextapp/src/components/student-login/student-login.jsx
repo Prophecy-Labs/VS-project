@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form";
 import Button from "@/components/Button/button.jsx";
 import styles from "./student-login.module.css";
 import Label from "@/components/Label/label.jsx";
-
+import { useRouter } from 'next/navigation';
 export default function StudentForm(props) {
     const {
         register,
@@ -12,8 +12,10 @@ export default function StudentForm(props) {
         watch,
         formState: { errors },
     } = useForm()
-
-    const onSubmit = (data) => console.log(data)
+    const router = useRouter();
+    const onSubmit = (data) => {
+        router.push(`/Lobby/student/${data.name}&${data.connection_code}`);
+    };
 
     return (
         <form className={`${styles.register__form}`} onSubmit={handleSubmit(onSubmit)}>

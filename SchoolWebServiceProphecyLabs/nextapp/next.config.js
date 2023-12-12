@@ -4,8 +4,11 @@ const rewrites = () => {
         {
             source: "/Home/:path*",
             destination: "http://localhost:5136/Home/:path*", 
-        },
-       
+        },     
+        {
+            source: "/lobbyHub/:path*",
+            destination: "http://localhost:5136/Lobby/:path*",
+        },     
     ];
 }; 
 

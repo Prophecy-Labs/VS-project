@@ -5,13 +5,10 @@ import styles from "./register-page.module.css";
 import LoginForm from "@/components/teacher-login/teacher-login";
 import StudentForm from "@/components/student-login/student-login";
 
-
 export default function Home() {
 
     const [isLoginForm, setIsLoginForm] = useState(false);
     const [isStudentForm, setIsStudentForm] = useState(true);
-
-   
 
     const changeForm = () => {
         setIsLoginForm(!isLoginForm);
