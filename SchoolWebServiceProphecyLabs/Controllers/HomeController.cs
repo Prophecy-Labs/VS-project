@@ -6,15 +6,30 @@ using SchoolWebServiceProphecyLabs.Data;
 using SchoolWebServiceProphecyLabs.SignalR;
 namespace SchoolWebServiceProphecyLabs.Controllers
 {
+    public interface ITeamService
+    {
+        Dictionary<string, List<string>> Teams { get; set; }
+    }
+
+    public class TeamService : ITeamService
+    {
+        public Dictionary<string, List<string>> Teams { get; set; }
+        public TeamService()
+        {
+            Teams = new Dictionary<string, List<string>>();
+        }
+    }
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         public DataBase dataBase = new DataBase();
-        public static Dictionary<string, Team> Teams = new Dictionary<string, Team>();
+        private readonly ITeamService _teamService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ITeamService teamService)
         {
             _logger = logger;
+            _teamService = teamService;
         }
 
         public IActionResult Index()
@@ -27,27 +42,23 @@ namespace SchoolWebServiceProphecyLabs.Controllers
             return View();
         }
 
-
-
         [HttpPost]
-        public IActionResult Register([FromBody] Userdata data) 
-        {        
-            return Ok(dataBase.InsertUser(data.login,data.email,data.password));
+        public IActionResult Register([FromBody] Userdata data)
+        {
+            return Ok(dataBase.InsertUser(data.login, data.email, data.password));
         }
 
         [HttpPost]
         public IActionResult LogIn([FromBody] Userdata data)
-        {         
-            return Ok(dataBase.Login(data.login, data.password)); 
+        {
+            return Ok(dataBase.Login(data.login, data.password));
         }
 
         [HttpGet]
         public IActionResult LobbyCreate()
         {
-          
             var teamCode = GenerateTeamCode(5);
-           
-            Teams[teamCode] = new Team { Code = teamCode, Clients = new List<string>() };
+            _teamService.Teams[teamCode] = new List<string>();
             return Ok(teamCode);
         }
 

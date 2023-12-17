@@ -11,7 +11,7 @@ export default function Lobby() {
     if (!router.isReady) return <div>Loading...</div>
     const { params } = router.query; 
 
-    const usersList = [];
+    
     const [message, setMessage] = useState(JSON.stringify(usersList));
 
     var parts = params.split('&');

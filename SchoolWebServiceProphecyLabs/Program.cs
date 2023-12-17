@@ -1,9 +1,11 @@
+using SchoolWebServiceProphecyLabs.Controllers;
 using SchoolWebServiceProphecyLabs.SignalR;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<ITeamService, TeamService>();
 builder.Services.AddSignalR();
 var app = builder.Build();
 

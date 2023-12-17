@@ -1,22 +1,23 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
+using SchoolWebServiceProphecyLabs.Controllers;
 namespace SchoolWebServiceProphecyLabs.SignalR
 {
-
-
-    public class Team
-    {
-        public string Code { get; set; }
-        public List<string> Clients { get; set; }
-    }
-
     public class LobbyHub : Hub
     {
+        private readonly ITeamService _teamService;
+
+        public LobbyHub(ITeamService teamService)
+        {
+            _teamService = teamService;
+        }
+
         public async Task JoinTeam(string teamCode, string username)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, teamCode);
-            await Clients.All.SendAsync("Notify", username);
+            _teamService.Teams[teamCode].Add(username);
+            await Clients.All.SendAsync("Notify", _teamService.Teams[teamCode].ToArray());
         }
 
         public async Task StartGame(string teamCode)

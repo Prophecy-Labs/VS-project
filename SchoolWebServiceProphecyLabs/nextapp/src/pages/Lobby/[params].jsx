@@ -15,9 +15,11 @@ export default function Lobby(props) {
 
     const teacherName = 'Иванов И. И.';
 
-    const students = [];//заменить на данные с бэка
-    const [stunentsDisplay, setDisplay] = useState(students);
+    const [students, setStudents] = useState([]);
 
+    const addStudent = () => {
+        setStudents([...students]);
+    };
     const connectionCode = code;//заменить на данные с бэка
     const gameInformation = {
         gameTitle: 'своя игра',
@@ -39,9 +41,10 @@ export default function Lobby(props) {
                 console.log("Connection started!");
                 connection.invoke("JoinTeam", code, name);
                 connection.on("Notify", (newMessage) => {
-                    students.push(newMessage);
+                    students.splice(0, students.length);
+                    students.push(...newMessage);
+                    addStudent();
                     console.log(students);
-                    setDisplay(JSON.stringify(students));
                 });
             })
             .catch(err => console.log("Error while establishing connection :(", err));
