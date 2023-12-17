@@ -16,7 +16,7 @@ namespace SchoolWebServiceProphecyLabs.SignalR
         public async Task JoinTeam(string teamCode, string username)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, teamCode);
-            await Clients.All.SendAsync("Notify", $"{username} вошел в игру");
+            await Clients.All.SendAsync("Notify", username);
         }
 
         public async Task StartGame(string teamCode)

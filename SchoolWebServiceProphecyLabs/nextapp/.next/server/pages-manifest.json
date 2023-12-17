@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Lobby/teacher/[code]": "pages/Lobby/teacher/[code].js",
-  "/Lobby/student/[params]": "pages/Lobby/student/[params].js"
+  "/main-page/main-page": "pages/main-page/main-page.js",
+  "/Lobby/[params]": "pages/Lobby/[params].js"
 }

@@ -1,0 +1,47 @@
+.container {
+    width: 100%;
+    position: relative;
+    border-radius: 35px;
+    padding: 32px;
+    background-color: #DBEDF3;
+    z-index: -1;
+    box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.game-title {
+    margin: 0;
+    color: #334850;
+    font-family: Gunterz;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.game-name {
+    width: 100%;
+    z-index: 1;
+    margin: 0 30px 0 0;
+    color: #334850;
+    font-family: Srbija Sans;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.game-description {
+    max-width: 70%;
+    z-index: 1;
+    margin: 0 30px 0 0;
+    color: #2E393D;
+    font-family: Inter;
+    font-size: 36px;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.bg-image {
+    z-index: -1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 0 35px 0 0;
+}

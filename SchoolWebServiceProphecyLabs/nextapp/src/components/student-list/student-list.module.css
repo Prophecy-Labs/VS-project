@@ -1,0 +1,34 @@
+.container {
+    max-width: 40%;
+}
+
+.title {
+    margin:  0;
+    background-color: #3E3E3E;
+    color: #DBEDF3;
+    text-align: center;
+    font-family: Gunterz;
+    font-size: 36px;
+    font-weight: 500;
+    padding: 25px;
+    border-radius: 35px 35px 0 0;
+    box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.student-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 50px 32px;
+    list-style: none;
+    border-radius: 0 0 35px 35px;
+    background: #DBEDF3;
+    box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.student-li {
+    color: #334850;
+    font-family: Srbija Sans;
+    font-size: 44px;
+    font-weight: 400;
+}

@@ -23,8 +23,71 @@
 }
 
 .container {
+    margin: 2% 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-span {
+    color: #334850;
+    font-family: Gunterz;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.game-settings {
+    max-width: 100%;
     margin: 5% 5%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 35px;
+}
+
+.btn-start {
+    border-radius: 20px;
+    padding: 10px;
+    border: none;
+    max-width: 350px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #59696F;
+    color: #E5EDEF;
+    text-align: center;
+    font-family: Gunterz;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 170%;
+}
+
+.btn-end {
+    max-width: 350px;
+    color: #FF6363;
+    background: none;
+    text-align: center;
+    font-family: Gunterz;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 170%;
+    text-decoration-line: underline;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+}
+
+.disconnect-btn {
+    border-radius: 39px;
+    padding: 10px;
+    max-width: 570px;
+    background-color: #3E3E3E;
+    color: #CCCDCF;
+    text-align: center;
+    font-family: Gunterz;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+    user-select: none;
+    border: none;
 }

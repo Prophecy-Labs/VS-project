@@ -6,13 +6,13 @@ import { useRouter } from 'next/navigation';
 
 export default function GameCard(props) {
     const router = useRouter();
-
+    const name = 'teacher name';
     const handleClick = (e) => {
         e.preventDefault();
         fetch('/Home/LobbyCreate/')
             .then(response => response.text())
             .then(data => {
-                router.push(`/Lobby/teacher/${data}`)
+                router.push(`/Lobby/${name}&${data}&teacher`)
             });
         
     }

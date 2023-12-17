@@ -9,10 +9,14 @@ import { useRouter } from 'next/router'
 export default function Lobby() {
     const router = useRouter()
     if (!router.isReady) return <div>Loading...</div>
-    const { params } = router.query;
+    const { params } = router.query; 
+
     const usersList = [];
     const [message, setMessage] = useState(JSON.stringify(usersList));
 
+    var parts = params.split('&');
+    var name = parts[0];
+    var code = parts[1];
     useEffect(() => {
         const connection = new signalR.HubConnectionBuilder()
             .withUrl(`/lobbyHub`, { withCredentials: false })
@@ -21,9 +25,7 @@ export default function Lobby() {
         connection.start()
             .then(() => {
                 
-                var parts = params.split('&');
-                var name = parts[0];
-                var code = parts[1];
+               
                 console.log("Connection started!");
                 usersList.push("Connection started!");
                 connection.invoke("JoinTeam", code, name);
