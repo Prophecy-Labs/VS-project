@@ -7,6 +7,7 @@
         public string answer;
     }
     public class TopicData {
+        public int id;
         public string title;
         public int round;
         public List<QuestionData> questions;

@@ -8,7 +8,7 @@ const GameTable = (props) => {
     const [content, setContent] = useState(null);
     const handleClick = (topicIndex, questionIndex) => {
         setContent(
-            <QuestionJeopardy topicIndex={topicIndex} questionIndex={questionIndex + 1} questionsList={questionsText} />
+            <QuestionJeopardy topicIndex={topicIndex} questionIndex={questionIndex} questionsList={questionsText} />
         )
     }
 

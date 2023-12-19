@@ -17,12 +17,16 @@ namespace SchoolWebServiceProphecyLabs.SignalR
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, teamCode);
             _teamService.Teams[teamCode].Add(username);
-            await Clients.All.SendAsync("Notify", _teamService.Teams[teamCode].ToArray());
+            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].ToArray());
         }
 
         public async Task StartGame(string teamCode)
         {
-            await Clients.Group(teamCode).SendAsync("Start Game");
+            await Clients.Group(teamCode).SendAsync("GamePush", null);
+        }
+        public async Task CheckUsers(string teamCode)
+        {
+            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].ToArray());
         }
     }
 }

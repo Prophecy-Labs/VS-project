@@ -2,7 +2,9 @@
   "polyfillFiles": [
     "static/chunks/polyfills.js"
   ],
-  "devFiles": [],
+  "devFiles": [
+    "static/chunks/react-refresh.js"
+  ],
   "ampDevFiles": [],
   "lowPriorityFiles": [
     "static/development/_buildManifest.js",
@@ -13,7 +15,31 @@
     "static/chunks/main-app.js"
   ],
   "pages": {
-    "/_app": []
+    "/Lobby/[params]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Lobby/[params].js"
+    ],
+    "/_app": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_app.js"
+    ],
+    "/_error": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_error.js"
+    ],
+    "/jeopardy/[params]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/jeopardy/[params].js"
+    ],
+    "/main-page/main-page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/main-page/main-page.js"
+    ]
   },
   "ampFirstPages": []
 }

@@ -3,7 +3,7 @@ import styles from './questionJeopardy.module.css'
 
 const QuestionJeopardy = (props) => {
     const {topicIndex, questionIndex, questionsList} = props;
-    const question = questionsList[topicIndex][`q${questionIndex}00`];
+    const question = questionsList[topicIndex][questionIndex];
 
 
     const [gaveAnswer, setGaveAnswer] = useState(false);

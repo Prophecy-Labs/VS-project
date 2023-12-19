@@ -4,7 +4,9 @@ using System.Diagnostics;
 using Microsoft.Data.SqlClient;
 using SchoolWebServiceProphecyLabs.Data;
 using SchoolWebServiceProphecyLabs.SignalR;
+using Newtonsoft.Json;
 namespace SchoolWebServiceProphecyLabs.Controllers
+
 {
     public interface ITeamService
     {
@@ -69,6 +71,13 @@ namespace SchoolWebServiceProphecyLabs.Controllers
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        [HttpPost]
+        public IActionResult GetGamePack([FromBody] GamePack pack)
+        {
+            var result = dataBase.GetGameData(pack.Login, pack.Name);
+            return Ok(JsonConvert.SerializeObject(result));
+        }
     }
     public class Userdata
     {
@@ -76,5 +85,9 @@ namespace SchoolWebServiceProphecyLabs.Controllers
         public string password { get; set; }
         public string email { get; set; }
     }
-
+    public class GamePack
+    {
+        public string Login { get; set; }
+        public string Name { get; set; }
+    }
 }

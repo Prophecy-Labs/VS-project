@@ -48,16 +48,17 @@ export default function Lobby(props) {
                     addStudent();
                     console.log(students);
                 });
-                connection.on("Start Game", () => {
-                    e.preventDefault();
-                    router.push(`/jeopardy/Jeopardy`);
-                })
+              
             })
             .catch(err => console.log("Error while establishing connection :(", err));
 
-        const startGame = (e) => {   
-            connection.invoke("StartGame");
+        const startGame = () => {   
+            connection.invoke("StartGame", code);
         }
+        connection.on("GamePush", () => {
+            //e.preventDefault();
+            router.push(`/jeopardy/${params}`);
+        })
 
         if (member === 'teacher') {
             setContainer(
