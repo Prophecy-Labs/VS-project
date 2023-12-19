@@ -1,0 +1,59 @@
+@font-face {
+    font-family: NokiaKokia;
+    src: url('../../../fonts/NokiaKokia(RYS BY LYAJKA).ttf');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Gunterz;
+    src: url("../../../fonts/Gunterz-Medium.otf") format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Srbija Sans;
+    src: url("../../../fonts/Srbija Sans.woff2") format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+.container {
+    margin: 30px 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-title {
+    margin: 0;
+    padding: 0;
+    color: #4E585B;
+    text-align: center;
+    font-family: Gunterz;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.stud-list {
+    width: 80%;
+    overflow-x: auto;
+}
+
+.btn-end {
+    max-width: 350px;
+    color: #FF6363;
+    background: none;
+    font-family: Gunterz;
+    font-size: 23px;
+    font-weight: 500;
+    text-decoration-line: underline;
+    text-decoration-line: underline;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+}

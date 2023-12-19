@@ -36,6 +36,8 @@ export default function Lobby(props) {
             .withUrl(`/lobbyHub`, { withCredentials: false })
             .build();
 
+        sessionStorage.setItem('signalRConnection', JSON.stringify(connection));
+
         connection.start()
             .then(() => {
                 console.log("Connection started!");
@@ -46,15 +48,23 @@ export default function Lobby(props) {
                     addStudent();
                     console.log(students);
                 });
+                connection.on("Start Game", () => {
+                    e.preventDefault();
+                    router.push(`/jeopardy/Jeopardy`);
+                })
             })
             .catch(err => console.log("Error while establishing connection :(", err));
+
+        const startGame = (e) => {   
+            connection.invoke("StartGame");
+        }
 
         if (member === 'teacher') {
             setContainer(
                 <div className="left-container">
                     <span className={styles["top-span"]}>КОД ПОДКЛЮЧЕНИЯ: {connectionCode}</span>
                     <div className={styles['game-settings']}>
-                        <button className={styles['btn-start']}>Начать сессию</button>
+                        <button className={styles['btn-start']} onClick={startGame}>Начать сессию</button>
                         <LobbyView data={gameInformation} />
                         <button className={styles['btn-end']}>закрыть сессию</button>
                     </div>

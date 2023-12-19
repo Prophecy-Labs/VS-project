@@ -1,0 +1,55 @@
+.container {
+    margin: 40px 0;
+    display: flex;
+    max-width: 90%;
+    max-height: 160px;
+}
+
+.list-container {
+    margin: 0 30px;
+    display: flex;
+    column-gap: 6px;
+    overflow-x: auto;
+}
+
+.master-card {
+    max-width: 200px;
+    border-radius: 17px;
+    background: #4E585B;
+    color: #64DC97;
+    text-align: center;
+    font-family: Srbija Sans;
+    font-size: 30px;
+    font-weight: 400;
+    position: relative;
+    padding: 50px 10px 20px 10px;
+}
+
+.master-card::before {
+    content: "Ведущий";
+    width: calc(100% - 10px);
+    position: absolute;
+    padding: 5px;
+    border-radius: 17px 17px 0 0;
+    text-align: center;
+    background-color: #64DC97;
+    color: #4E585B;
+    top: 0;
+    left: 0;
+}
+
+.student-card {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+    max-width: 200px;
+    padding: 20px 10px;
+    border-radius: 17px;
+    background: #4E585B;
+    color: #DBEDF3;
+    text-align: center;
+    font-family: Srbija Sans;
+    font-size: 30px;
+    font-weight: 400;
+}
