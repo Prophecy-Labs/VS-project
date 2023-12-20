@@ -4,12 +4,13 @@ import RegForm from "@/components/registration-form/register-form";
 import styles from "./register-page.module.css";
 import LoginForm from "@/components/teacher-login/teacher-login";
 import StudentForm from "@/components/student-login/student-login";
-
+import { useContext } from "react";
+import { SignalRContext } from "@/app/SignalRContext";
 export default function Home() {
-
+  
     const [isLoginForm, setIsLoginForm] = useState(false);
     const [isStudentForm, setIsStudentForm] = useState(true);
-
+    
     const changeForm = () => {
         setIsLoginForm(!isLoginForm);
     };
@@ -26,11 +27,12 @@ export default function Home() {
     if (isLoginForm)  {
         formToDisplay = <RegForm changeStudentForm={changeStudentForm} changeForm={changeForm}/>
     }
-
+   
     return (
         <>
             <header />
             <main>
+             
                 <div className={`${styles.flex}`}>
                     {formToDisplay}
                 </div>

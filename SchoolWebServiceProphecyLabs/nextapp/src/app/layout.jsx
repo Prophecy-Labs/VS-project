@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css';
-
+import { SignalRProvider } from "@/app/SignalRContext";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -9,9 +9,13 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="ru">
-      <body className={inter.className}>{children}</body>
-    </html>
-  )
+    return (
+        <html lang="ru">
+            <body className={inter.className}>
+                <SignalRProvider> 
+                    {children}
+                </SignalRProvider>
+            </body>
+        </html>
+            )
 }

@@ -11,6 +11,18 @@
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
+    ],
+    "/main-page/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/main-page/page.css",
+      "static/chunks/app/main-page/page.js"
+    ],
+    "/main-page/lobby/[...slug]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/main-page/lobby/[...slug]/page.css",
+      "static/chunks/app/main-page/lobby/[...slug]/page.js"
     ]
   }
 }

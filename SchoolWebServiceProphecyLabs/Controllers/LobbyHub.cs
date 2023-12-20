@@ -13,11 +13,14 @@ namespace SchoolWebServiceProphecyLabs.SignalR
             _teamService = teamService;
         }
 
-        public async Task JoinTeam(string teamCode, string username)
+        public async Task JoinTeam(string teamCode, string username, string role)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, teamCode);
-            _teamService.Teams[teamCode].Add(username);
-            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].ToArray());
+            if (role != "teacher")
+                _teamService.Teams[teamCode].students.Add(new Student { name = username, score = 0 });
+            else _teamService.Teams[teamCode].teacher = username;
+            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].students.ToArray(), _teamService.Teams[teamCode].teacher);
+           // await Clients.Group(teamCode).SendAsync("GetTeacher", _teamService.Teams[teamCode].students.ToArray());
         }
 
         public async Task StartGame(string teamCode)
@@ -26,7 +29,7 @@ namespace SchoolWebServiceProphecyLabs.SignalR
         }
         public async Task CheckUsers(string teamCode)
         {
-            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].ToArray());
+            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].students.ToArray());
         }
     }
 }

@@ -10,18 +10,27 @@ namespace SchoolWebServiceProphecyLabs.Controllers
 {
     public interface ITeamService
     {
-        Dictionary<string, List<string>> Teams { get; set; }
+        Dictionary<string, Team> Teams { get; set; }
     }
 
     public class TeamService : ITeamService
     {
-        public Dictionary<string, List<string>> Teams { get; set; }
+        public Dictionary<string, Team> Teams { get; set; }
         public TeamService()
         {
-            Teams = new Dictionary<string, List<string>>();
+            Teams = new Dictionary<string, Team>();
         }
     }
-
+    public class Team
+    {
+        public List<Student> students { get; set; }
+        public string teacher { get; set; }
+    }
+    public class Student 
+    {
+        public string name { get; set; }
+        public int score { get; set; }
+    }
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -60,7 +69,7 @@ namespace SchoolWebServiceProphecyLabs.Controllers
         public IActionResult LobbyCreate()
         {
             var teamCode = GenerateTeamCode(5);
-            _teamService.Teams[teamCode] = new List<string>();
+            _teamService.Teams[teamCode] = new Team { students = new List<Student>() };
             return Ok(teamCode);
         }
 

@@ -1,0 +1,7 @@
+export default function RoflsPage() {
+    return 
+    <div>
+        <p>ROFLS BOYS</p>
+    </div>
+
+}

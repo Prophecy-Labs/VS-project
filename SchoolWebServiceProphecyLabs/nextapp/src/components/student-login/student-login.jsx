@@ -14,7 +14,7 @@ export default function StudentForm(props) {
     } = useForm()
     const router = useRouter();
     const onSubmit = (data) => {
-        router.push(`/Lobby/${data.name}&${data.connection_code}&student`);
+        router.push(`/main-page/lobby/${data.name}/${data.connection_code}/student`)
     };
 
     return (
