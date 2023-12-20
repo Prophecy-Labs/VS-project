@@ -29,7 +29,7 @@ namespace SchoolWebServiceProphecyLabs.SignalR
         }
         public async Task CheckUsers(string teamCode)
         {
-            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].students.ToArray());
+            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].students.ToArray(), _teamService.Teams[teamCode].teacher);
         }
     }
 }

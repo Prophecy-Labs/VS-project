@@ -2,7 +2,7 @@ import React from "react";
 import styles from './studentListJeopardy.module.css';
 
 const StudListJeopardy = (props) => {
-    let teacherName = 'Шадрин Денис';
+    let { teacherName } = props;
     let {studList} = props;
 
     return (

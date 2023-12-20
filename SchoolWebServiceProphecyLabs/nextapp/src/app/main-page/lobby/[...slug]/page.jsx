@@ -27,7 +27,7 @@ export default function Lobby({ params }) {
     }
     const connection = useContext(SignalRContext);
 
-    const [teacherName, setTeacherName] = useState("");
+    const [teacherName, setTeacherName] = useState('');
 
     const [member, setMember] = useState(role);
     const [container, setContainer] = useState(null);
@@ -38,10 +38,10 @@ export default function Lobby({ params }) {
                 .then(() => {
                     connection.invoke("JoinTeam", connectionCode, name, role);
                     connection.on("Notify", (newMessage, teacher) => {
+                        setTeacherName(teacher);
                         students.splice(0, students.length);
                         students.push(...newMessage.map(item => item.name));
                         addStudent();
-                        setTeacherName("John Doe");
                         console.log(teacherName);
                     });
                 });

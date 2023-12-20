@@ -23,6 +23,12 @@
       "static/chunks/main-app.js",
       "static/css/app/main-page/lobby/[...slug]/page.css",
       "static/chunks/app/main-page/lobby/[...slug]/page.js"
+    ],
+    "/main-page/jeopardy/[...slug]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/main-page/jeopardy/[...slug]/page.css",
+      "static/chunks/app/main-page/jeopardy/[...slug]/page.js"
     ]
   }
 }

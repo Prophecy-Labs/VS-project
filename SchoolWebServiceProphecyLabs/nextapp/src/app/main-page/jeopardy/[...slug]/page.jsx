@@ -22,7 +22,7 @@ const Jeopardy = ({ params }) => {
     const qn1 = {
         0: 'Какой гриб самый крутой?11'
     }
-    let [studList, setStudList] = useState([stud1, stud2, stud3]);
+    let [studList, setStudList] = useState([]);
     const [gameContent, setGameContent] = useState({
         topic: ['тема1'],
         questions: [questions1],
@@ -32,11 +32,12 @@ const Jeopardy = ({ params }) => {
         setGameContent(content);
     }; 
     const [teacher, setTeacher] = useState(true);
+    const [teacherName, setTeacherName] = useState(null);
     const [content, setContent] = useState(null);
     useEffect(() => {
         connection.invoke("CheckUsers", code);
-        connection.on("Notify", (newMessage) => {
-            
+        connection.on("Notify", (newMessage, teacher) => {
+            setTeacherName(teacher);
             console.log(newMessage);
             setStudList(newMessage);
            
@@ -77,7 +78,7 @@ const Jeopardy = ({ params }) => {
             <div className={styles['container']}>
                 <p className={styles['game-title']}>{gameName}</p>
                 <GameTable gameContent={gameContent} />
-                <StudListJeopardy studList={studList} className={styles['stud-list']} />
+                <StudListJeopardy studList={studList} teacherName={teacherName} className={styles['stud-list']} />
             </div>
             <Footer/>
         </>
