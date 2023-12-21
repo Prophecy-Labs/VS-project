@@ -19,7 +19,7 @@ namespace SchoolWebServiceProphecyLabs.SignalR
             if (role != "teacher")
                 _teamService.Teams[teamCode].students.Add(new Student { name = username, score = 0 });
             else _teamService.Teams[teamCode].teacher = username;
-            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].students.ToArray(), _teamService.Teams[teamCode].teacher);
+            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].students.ToArray(), _teamService.Teams[teamCode].teacher, _teamService.Teams[teamCode].GameName);
            // await Clients.Group(teamCode).SendAsync("GetTeacher", _teamService.Teams[teamCode].students.ToArray());
         }
 

@@ -16,6 +16,7 @@ export default function LoginForm(props) {
     } = useForm()
     const router = useRouter();
     const onSubmit = (data) => {
+        const name = data.login;
         console.log(data);
         fetch('/Home/LogIn/', {
             method: 'POST',
@@ -28,7 +29,7 @@ export default function LoginForm(props) {
             .then(data => {
                 console.log(data)
                 if (data == "successful") {
-                    router.push('/main-page');
+                    router.push(`/main-page/${name}`);
                 } 
             });
     };

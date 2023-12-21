@@ -21,7 +21,7 @@ export default function Lobby({ params }) {
     const connectionCode = params.slug[1];
     const gameInformation = {
         gameTitle: 'своя игра',
-        name: 'История 10Г Первая мировая война',
+        [name, setname]: useState(''),
         description: 'своя игра - это...',
         image: require('../../../../img/jeopardy.svg'),
     }
@@ -37,7 +37,7 @@ export default function Lobby({ params }) {
             connection.start()
                 .then(() => {
                     connection.invoke("JoinTeam", connectionCode, name, role);
-                    connection.on("Notify", (newMessage, teacher) => {
+                    connection.on("Notify", (newMessage, teacher, gameName) => {
                         setTeacherName(teacher);
                         students.splice(0, students.length);
                         students.push(...newMessage.map(item => item.name));

@@ -25,6 +25,7 @@ namespace SchoolWebServiceProphecyLabs.Controllers
     {
         public List<Student> students { get; set; }
         public string teacher { get; set; }
+        public string GameName { get; set; }
     }
     public class Student 
     {
@@ -65,11 +66,11 @@ namespace SchoolWebServiceProphecyLabs.Controllers
             return Ok(dataBase.Login(data.login, data.password));
         }
 
-        [HttpGet]
-        public IActionResult LobbyCreate()
+        [HttpPost]
+        public IActionResult LobbyCreate([FromBody] GamePack pack)
         {
             var teamCode = GenerateTeamCode(5);
-            _teamService.Teams[teamCode] = new Team { students = new List<Student>() };
+            _teamService.Teams[teamCode] = new Team { students = new List<Student>(), GameName = pack.Name };
             return Ok(teamCode);
         }
 
@@ -87,6 +88,15 @@ namespace SchoolWebServiceProphecyLabs.Controllers
             var result = dataBase.GetGameData(pack.Login, pack.Name);
             return Ok(JsonConvert.SerializeObject(result));
         }
+
+        [HttpPost]
+        public IActionResult GetGameList([FromBody] GamePack pack)
+        {
+            var result = dataBase.GetGamesList(pack.Login);
+            return Ok(JsonConvert.SerializeObject(result));
+        }
+
+       
     }
     public class Userdata
     {

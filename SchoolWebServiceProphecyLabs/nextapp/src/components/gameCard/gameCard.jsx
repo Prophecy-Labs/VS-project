@@ -6,13 +6,19 @@ import { useRouter } from 'next/navigation';
 
 export default function GameCard(props) {
     const router = useRouter();
-    const name = 'teachername';
+    let { teacherName } = props;
     const handleClick = (e) => {
         e.preventDefault();
-        fetch('/Home/LobbyCreate/')
+        fetch('/Home/LobbyCreate/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ name: props.gameDescr })
+        })
             .then(response => response.text())
             .then(data => {
-                router.push(`/main-page/lobby/${name}/${data}/teacher`)
+                router.push(`/main-page/lobby/${teacherName}/${data}/teacher`)
             });
         
     }

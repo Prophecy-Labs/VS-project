@@ -110,45 +110,6 @@ namespace SchoolWebServiceProphecyLabs.Data
             SqlCommand cmd = new SqlCommand(command, SqlConnection);
         }
 
-        //public GameData GetGameData(string login, string name) { 
-        //    var result = new GameData();
-        //    SqlCommand cmd = new SqlCommand($"SELECT * FROM Jeopardy WHERE user_login='{login}' AND name = '{name}'", SqlConnection);
-        //    SqlConnection.Open();
-        //    SqlDataReader reader = cmd.ExecuteReader();
-        //    reader.Read();
-        //    var id = reader.GetInt32(0);
-        //    reader.Close();
-        //    result.name = name;
-        //    result.topics = GetTopicData(id);
-        //    SqlConnection.Close();
-        //    return result;
-        //}
-        //public List<TopicData> GetTopicData(int id)
-        //{
-        //    var result = new List<TopicData>();
-        //    SqlCommand cmd = new SqlCommand($"SELECT * FROM Jeopardy_Topic WHERE id_jeopardy='{id}'", SqlConnection);
-        //    SqlDataReader reader = cmd.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        result.Add(new TopicData { id = reader.GetInt32(0),title = reader.GetString(2), round = reader.GetInt32(3) }) ;
-        //    }
-        //    reader.Close();
-        //    foreach (var topic in result)
-        //    {
-        //        topic.questions = GetQuestionData(topic.id, reader);
-        //    }
-        //    return result;
-        //}
-        //public List<QuestionData> GetQuestionData(int id, SqlDataReader reader) {
-        //    var result = new List<QuestionData>();
-
-        //    SqlCommand cmd = new SqlCommand($"SELECT * FROM Jeopardy_Question WHERE id_topic='{id}'", SqlConnection);
-        //    reader = cmd.ExecuteReader();
-        //    while (reader.Read()) {
-        //        result.Add(new QuestionData { text = reader.GetString(2), cost = reader.GetInt32(5), answer = reader.GetString(6) }); 
-        //    }
-        //    return result;
-        //}
         public GameData GetGameData(string login, string name)
         {
             var result = new GameData();
@@ -165,8 +126,8 @@ namespace SchoolWebServiceProphecyLabs.Data
                     var id = reader.GetInt32(0);
                     result.name = name;
                     result.topics = GetTopicData(id);
-                } // reader автоматически закрывается и уничтожается здесь
-            } // connection автоматически закрывается и уничтожается здесь
+                }
+            } 
 
             return result;
         }
@@ -187,11 +148,8 @@ namespace SchoolWebServiceProphecyLabs.Data
                     {
                         result.Add(new TopicData { id = reader.GetInt32(0), title = reader.GetString(2), round = reader.GetInt32(3) });
                     }
-                } // reader автоматически закрывается и уничтожается здесь
-            } // connection автоматически закрывается и уничтожается здесь
-
-            // Добавьте отладочный вывод, чтобы проверить, что result не пустой
-            //Console.WriteLine($"TopicData count: {result.Count}");
+                } 
+            }
             foreach (var topic in result)
             {
                 topic.questions = GetQuestionData(topic.id);
@@ -217,12 +175,46 @@ namespace SchoolWebServiceProphecyLabs.Data
                     {
                         result.Add(new QuestionData { text = reader.GetString(2), cost = reader.GetInt32(5), answer = reader.GetString(6) });
                     }
-                } // reader автоматически закрывается и уничтожается здесь
-            } // connection автоматически закрывается и уничтожается здесь
+                }
+            } 
 
             return result;
         }
 
+        public List<string> GetGamesList(string login) {
+            var result = new List<string>();
+            using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=
+            X:\VS projects\SchoolWebServiceProphecyLabs\SchoolWebServiceProphecyLabs\Data\db.mdf;Integrated Security=True"))
+            {
+                connection.Open();
 
+                using (SqlCommand cmd = new SqlCommand($"SELECT * FROM Jeopardy WHERE user_login='{login}'", connection))
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result.Add(reader.GetString(2));
+                    }
+                } 
+            } 
+            return result;
+        }
+
+        //public string GetGamesInfo(string login, string name)
+        //{
+        //    string result = "";
+        //    using (SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=
+        //    X:\VS projects\SchoolWebServiceProphecyLabs\SchoolWebServiceProphecyLabs\Data\db.mdf;Integrated Security=True"))
+        //    {
+        //        connection.Open();
+
+        //        using (SqlCommand cmd = new SqlCommand($"SELECT * FROM Jeopardy WHERE user_login='{login}' AND name = '{name}'", connection))
+        //        using (SqlDataReader reader = cmd.ExecuteReader())
+        //        { 
+        //             result = reader.GetString(2);
+        //        } 
+        //    } 
+        //    return result;
+        //}
     }
 }
