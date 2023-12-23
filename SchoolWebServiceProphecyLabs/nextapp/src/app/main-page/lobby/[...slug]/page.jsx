@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { SignalRContext } from "@/app/SignalRContext";
 
 export default function Lobby({ params }) {
-    
+
     const router = useRouter();
     const [students, setStudents] = useState([]);
     const name = params.slug[0]
@@ -18,10 +18,11 @@ export default function Lobby({ params }) {
     const addStudent = () => {
         setStudents([...students]);
     };
+    const [gameName, setGameName] = useState("");
     const connectionCode = params.slug[1];
     const gameInformation = {
         gameTitle: 'своя игра',
-        [name, setname]: useState(''),
+        setGameName: '',
         description: 'своя игра - это...',
         image: require('../../../../img/jeopardy.svg'),
     }
@@ -36,10 +37,11 @@ export default function Lobby({ params }) {
         if (connection && connection._connectionState == "Disconnected") {
             connection.start()
                 .then(() => {
-                    connection.invoke("JoinTeam", connectionCode, name, role);
-                    connection.on("Notify", (newMessage, teacher, gameName) => {
+                    connection.invoke("JoinTeam", connectionCode, name, role, gameName);
+                    connection.on("Notify", (newMessage, teacher, game) => {
                         setTeacherName(teacher);
                         students.splice(0, students.length);
+                        setGameName(game);
                         students.push(...newMessage.map(item => item.name));
                         addStudent();
                         console.log(teacherName);

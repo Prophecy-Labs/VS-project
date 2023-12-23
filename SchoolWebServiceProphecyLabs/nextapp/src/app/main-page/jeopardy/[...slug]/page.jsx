@@ -51,7 +51,7 @@ const Jeopardy = ({ params }) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                //console.log(data)
                 const Content = {
                     topic: data.topics.map(topic => topic.title),
                     questions: data.topics.map(topic => topic.questions.map(questions => questions.cost)),
@@ -77,7 +77,7 @@ const Jeopardy = ({ params }) => {
             {content}
             <div className={styles['container']}>
                 <p className={styles['game-title']}>{gameName}</p>
-                <GameTable gameContent={gameContent} />
+                <GameTable gameContent={gameContent} teamCode={code} role={role} name={ name } />
                 <StudListJeopardy studList={studList} teacherName={teacherName} className={styles['stud-list']} />
             </div>
             <Footer/>

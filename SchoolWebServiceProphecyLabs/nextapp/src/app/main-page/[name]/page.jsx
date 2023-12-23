@@ -41,37 +41,6 @@ export default function MainPage({ params }) {
                         />
                     );
                 })}
-               
-                {/*<GameCard*/}
-                {/*    gameName="Слабое звено"*/}
-                {/*    gameDescr="Биология 6А Размножение"*/}
-                {/*    image={require('../../../img/weak-link.svg')}*/}
-                {/*    gameType="weakLink"*/}
-                {/*/>*/}
-                {/*<GameCard*/}
-                {/*    gameName="тест 3"*/}
-                {/*    gameDescr="История 10В Реформы Александра Первого"*/}
-                {/*    image={require('../../../img/test.svg')}*/}
-                {/*    gameType="test"*/}
-                {/*/>*/}
-                {/*<GameCard*/}
-                {/*    gameName="тест 4"*/}
-                {/*    gameDescr="История 10В Реформы Александра Первого"*/}
-                {/*    image={require('../../../img/test.svg')}*/}
-                {/*    gameType="test"*/}
-                {/*/>*/}
-                {/*<GameCard*/}
-                {/*    gameName="тест 5"*/}
-                {/*    gameDescr="История 10В Реформы Александра Первого"*/}
-                {/*    image={require('../../../img/test.svg')}*/}
-                {/*    gameType="test"*/}
-                {/*/>*/}
-                {/*<GameCard*/}
-                {/*    gameName="тест 6"*/}
-                {/*    gameDescr="История 10В Реформы Александра Первого"*/}
-                {/*    image={require('../../../img/test.svg')}*/}
-                {/*    gameType="test"*/}
-                {/*/>*/}
             </div>
             <Footer />
         </>

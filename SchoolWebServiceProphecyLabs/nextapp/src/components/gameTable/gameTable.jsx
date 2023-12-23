@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from './gameTable.module.css';
 import QuestionJeopardy from "../questionJeopardy/questionJeopardy";
-
+import { SignalRContext } from "@/app/SignalRContext";
 const GameTable = (props) => {
     const {topic, questions, questionsText} = props.gameContent;
-
+    const connection = useContext(SignalRContext);
     const [content, setContent] = useState(null);
     const handleClick = (topicIndex, questionIndex) => {
-        setContent(
-            <QuestionJeopardy topicIndex={topicIndex} questionIndex={questionIndex} questionsList={questionsText} />
-        )
+        connection.invoke("HandleQuestion", props.teamCode, topicIndex, questionIndex);
     }
+    connection.on("OpenQuestion", (tIndex, qIndex) => {
+        setContent(
+            <QuestionJeopardy topicIndex={tIndex} questionIndex={qIndex} questionsList={questionsText} costList={questions} role={props.role} name={props.name} />
+        )
+    });
+   
 
     return (
         <>
