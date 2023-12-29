@@ -38,7 +38,8 @@ namespace SchoolWebServiceProphecyLabs.SignalR
         public async Task HandleAnswer(string teamCode, string studentName, int score)
         {
             _teamService.Teams[teamCode].students.FirstOrDefault(item => item.name == studentName).score += score;
-            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].students.ToArray());
+            await Clients.Group(teamCode).SendAsync("Notify", _teamService.Teams[teamCode].students.ToArray(), _teamService.Teams[teamCode].teacher);
+            await Clients.Group(teamCode).SendAsync("QuestionResolve");
         }
         public async Task GiveAnswer(string teamCode, string studentName, string answer)
         {
@@ -47,6 +48,14 @@ namespace SchoolWebServiceProphecyLabs.SignalR
             public async Task HandleQuestion(string teamCode, int topicIndex, int questionIndex)
         {
             await Clients.Group(teamCode).SendAsync("OpenQuestion", topicIndex, questionIndex);
+        }
+        public async Task BlockButton(string teamCode)
+        {
+            await Clients.Group(teamCode).SendAsync("BlockButton");
+        }
+        public async Task NoAnswers(string teamCode)
+        {
+            await Clients.Group(teamCode).SendAsync("QuestionResolve");
         }
     }
 }

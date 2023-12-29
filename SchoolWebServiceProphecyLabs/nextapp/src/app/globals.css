@@ -1,4 +1,4 @@
-@import "normalize.css";
+/*@import "normalize.css";
 
 @font-face {
   font-family: NokiaKokia;
@@ -14,12 +14,15 @@
   font-weight: 500;
   font-style: normal;
   font-display: swap;
-}
+}*/
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 30px;
 }
 
 html,
@@ -30,11 +33,11 @@ body {
   margin:0;
 }
 
-a {
+/*a {
   color: inherit;
   text-decoration: none;
 }
 
 .flex {
   display: flex;
-}
+}*/

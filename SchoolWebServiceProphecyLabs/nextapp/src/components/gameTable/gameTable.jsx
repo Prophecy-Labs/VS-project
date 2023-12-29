@@ -3,18 +3,21 @@ import styles from './gameTable.module.css';
 import QuestionJeopardy from "../questionJeopardy/questionJeopardy";
 import { SignalRContext } from "@/app/SignalRContext";
 const GameTable = (props) => {
-    const {topic, questions, questionsText} = props.gameContent;
+    const { topic, questions, questionsText, questionsAnswers } = props.gameContent;
     const connection = useContext(SignalRContext);
     const [content, setContent] = useState(null);
     const handleClick = (topicIndex, questionIndex) => {
-        connection.invoke("HandleQuestion", props.teamCode, topicIndex, questionIndex);
+        connection.invoke("HandleQuestion", props.params[1], topicIndex, questionIndex);
     }
     connection.on("OpenQuestion", (tIndex, qIndex) => {
         setContent(
-            <QuestionJeopardy topicIndex={tIndex} questionIndex={qIndex} questionsList={questionsText} costList={questions} role={props.role} name={props.name} />
-        )
+            <QuestionJeopardy topicIndex={tIndex} questionIndex={qIndex} questionsList={questionsText} Answers={questionsAnswers} costList={questions} params={props.params} />
+        );
+        document.getElementById(`${tIndex}-${qIndex}`).style.visibility = 'hidden';
     });
-   
+    connection.on("QuestionResolve", () => {
+        setContent(null)
+    });
 
     return (
         <>
@@ -32,7 +35,7 @@ const GameTable = (props) => {
                         return (
                             <div className={styles['string-container']}>
                                 {Object.values(elem).map((value, elemIndex) => {
-                                    return <div key={index} className={styles['game-card']} onClick={() => handleClick(index, elemIndex)}>{value}</div>;
+                                    return <div key={index} id={`${index}-${elemIndex}`} className={styles['game-card']} onClick={() => handleClick(index, elemIndex)}>{value}</div>;
                                 })}
                             </div>
                         );

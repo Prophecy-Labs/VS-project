@@ -2,110 +2,121 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./questionJeopardy.module.css";
 import { SignalRContext } from "@/app/SignalRContext";
 const QuestionJeopardy = (props) => {
-  const { topicIndex, questionIndex, questionsList, costList, role, name } = props;
-  const question = questionsList[topicIndex][`${questionIndex}`];
-  const cost = costList[topicIndex][`${questionIndex}`];
+    const { topicIndex, questionIndex, questionsList, Answers, costList, params } = props;
+    const [name, code, role] = props.params;
+    const question = questionsList[topicIndex][`${questionIndex}`];
+    const cost = costList[topicIndex][`${questionIndex}`];
+    const trueAnswer = Answers[topicIndex][`${questionIndex}`];
     const [member, setMember] = useState(role);
     //const [studentName, setStudentName] = useState("");
-  const connection = useContext(SignalRContext);
+    const connection = useContext(SignalRContext);
+    const [gaveAnswer, setGaveAnswer] = useState(false);
 
-    //connection.on("GetAnswer", (sName, answer) => { Эта хуйня должна получить какой именно еблан отвечает на вопрос, и его ответ
-    //    setStudentName();
+    const [stopTimer, setStopTimer] = useState(false);
+    connection.on("GetAnswer", (sName, answer) => {
+        setStopTimer(true);
+        setTeacherContent(
+            <div className={styles["teacher-container"]}>
+                <p className={styles["regular-text"]}
+                > {sName}</p>
+                <input
+                    type="text"
+                    className={styles["question-input"]}
+                    placeholder={answer ? answer : 'Нет ответа'}
+                    disabled
+                    id=''
+                />
+                <p className={styles["regular-text"]}
+                >Правильный ответ: {trueAnswer}</p>
+                <div className={styles["teacher-buttons"]}>
+                    <button className={styles["count-ans__btn"]} onClick={() => handleAnswer(cost, sName)}>Верно</button>
 
-    //})
+                    <button className={styles["dont-count-ans__btn"]} onClick={() => handleAnswer(-cost, sName)}>
 
-  const [teacherContent, setTeacherContent] = useState(
-    <div>
-      <input
-        type="text"
-        className={styles["question-input"]}
-        placeholder="ответ ученика"
-        disabled={true}
-      />
-          <div className={styles["teacher-buttons"]}>
-              <button className={styles["count-ans__btn"]} onClick={handleAnswer(cost)}>зачесть ответ</button>
-              <button className={styles["dont-count-ans__btn"]} onClick={handleAnswer(-cost)} >Пропустить</button>
-          </div>
-    </div>
-  );
-    //const handleAnswer = (score) => {
-    //    connection.invoke("HandleAnswer", props.teamcode, studentName, props.score); Это хуйня обаюатывает ответ учителя на ответ игрока
-    //} 
+                        Неверно
 
-  const [timer, setTimer] = useState(30);
+                    </button>
+                </div>
+            </div>
+        );
+    });
+    connection.on("BlockButton", () => {
+        let btn = document.getElementById("answer button");
+            btn.disabled = true;
+    });
+    const [studAnswer, setStudAnswer] = useState('');
+
+    const [teacherContent, setTeacherContent] = useState('');
+    const handleAnswer = (score, studentName) => {
+        connection.invoke("HandleAnswer", code, studentName, score);
+    } 
+
+    const [timer, setTimer] = useState(30);
 
     useEffect(() => {
-        if (time != 0) {
-            const interval = setInterval(() => {
+        let interval;//твой таймер был написан неправильно, я переписал
+        //теперь таймер останавливается, если кто-то дал ответ на вопрос
+        if (timer > 0 && !stopTimer) {
+            interval = setInterval(() => {
                 setTimer((timer) => timer - 1);
             }, 1000);
         } else {
-      //      connection.invoke("GiveAnswer", name, ); Тут надо еще передать значение ответа
+            if (gaveAnswer) {
+                GiveAnswer();
+            }
+            if (role == "teacher" && !stopTimer) {
+                connection.invoke("NoAnswers", code);
+            }
         }
-    return () => clearInterval(interval);
-  }, []);
 
-  const [gaveAnswer, setGaveAnswer] = useState(false);
-  const [content, setContent] = useState(
-    <button
-      className={styles["go-answer__btn"]}
-      onClick={() => setGaveAnswer(true)}
-    >
-      ответить
-    </button>
-  );
-  useEffect(() => {
-    if (gaveAnswer) {
-      setContent(
-        <input
-          className={styles["question-input"]}
-          placeholder="поле для ответа"
-        />
-      );
-    } else {
-      setContent(
-        <button
-          className={styles["go-answer__btn"]}
-          onClick={() => setGaveAnswer(true)}
-        >
-          ответить
-        </button>
-      );
+        return () => clearInterval(interval);
+    }, [timer]);
+ 
+  const [content, setContent] = useState(null);
+
+    const GiveAnswer = () => {
+        let input = document.getElementById('student-input').value;
+        connection.invoke("GiveAnswer", code, name, input);
     }
-  }, [gaveAnswer]);
 
-  useEffect(() => {
-    if (member === "teacher") {
-      setTeacherContent(
-        <div className={styles["teacher-container"]}>
-          <input
-            type="text"
-            className={styles["question-input"]}
-            placeholder="ответ ученика"
-            disabled
-          />
-          <div className={styles["teacher-buttons"]}>
-            <button className={styles["count-ans__btn"]}>зачесть ответ</button>
-            <button className={styles["dont-count-ans__btn"]}>
-              Пропустить
-            </button>
-          </div>
+    useEffect(() => {
+        if (gaveAnswer) {
+            setContent(
+                <div className={styles["student-container"]}>
+                    <input
+                        className={styles["question-input"]}
+                        placeholder="поле для ответа"
+                        id="student-input"
+                        onChange={(e) => setStudAnswer(e.target.value)}
+                    />
+                        <button className={styles["count-ans__btn"]} onClick={GiveAnswer}>Отправить</button>
+                </div>
+            );//когда любой ученик тыкает кнопку ответить у учителя отображается интуп задизейбленный, в котором выведеться значение ученика
+          
+        } else {
+            setContent(
+                <button
+                    id = "answer button"
+                    className={styles["go-answer__btn"]}
+                    onClick={() => { setGaveAnswer(true); connection.invoke("BlockButton", code); }}
+                >
+                    ответить
+                </button>
+            );
+            setTeacherContent(
+                <div className={styles["regular-text"]}>Еще не один ученик не дал ответ</div>
+            );
+        }
+    }, [gaveAnswer]);
+
+    return (
+        <div className={styles["question-window"]}>
+            <div className={styles['progress-bar']} style={{ width: `${(timer / 30 * 100)}%` }} />
+            <p className={styles["question-text"]}>{question}</p>
+            {member === "teacher" ? teacherContent : content}
         </div>
-      );
-    } else {
-      setTeacherContent({ content });
-    }
-  }, [member]);
-
-  return (
-    <div className={styles["question-window"]}>
-      <div className={styles['progress-bar']} style={{width: `${(timer/30 *100)}%`}}>
-        <div className={styles["timer"]}>{timer}</div> 
-      </div>
-      <p className={styles["question-text"]}>{question}</p>
-      {member === "teacher" ? teacherContent : content}
-    </div>
-  );
+    );
 };
+
 
 export default QuestionJeopardy;

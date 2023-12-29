@@ -1,6 +1,6 @@
 {
   "/page": "app/page.js",
-  "/main-page/[name]/page": "app/main-page/[name]/page.js",
   "/main-page/lobby/[...slug]/page": "app/main-page/lobby/[...slug]/page.js",
-  "/main-page/jeopardy/[...slug]/page": "app/main-page/jeopardy/[...slug]/page.js"
+  "/main-page/jeopardy/[...slug]/page": "app/main-page/jeopardy/[...slug]/page.js",
+  "/main-page/[name]/page": "app/main-page/[name]/page.js"
 }

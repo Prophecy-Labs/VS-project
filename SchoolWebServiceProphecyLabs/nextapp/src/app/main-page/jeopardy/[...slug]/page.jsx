@@ -55,9 +55,10 @@ const Jeopardy = ({ params }) => {
                 const Content = {
                     topic: data.topics.map(topic => topic.title),
                     questions: data.topics.map(topic => topic.questions.map(questions => questions.cost)),
-                    questionsText: data.topics.map(topic => topic.questions.map(questions => questions.text))
+                    questionsText: data.topics.map(topic => topic.questions.map(questions => questions.text)),
+                    questionsAnswers: data.topics.map(topic => topic.questions.map(questions => questions.answer))
                 }
-                console.log(Content);
+               // console.log(Content);
                changeContent(Content);
             });
 
@@ -75,9 +76,9 @@ const Jeopardy = ({ params }) => {
         <>
             <Header/>
             {content}
-            <div className={styles['container']}>
+            <div className={styles['container']}> 
                 <p className={styles['game-title']}>{gameName}</p>
-                <GameTable gameContent={gameContent} teamCode={code} role={role} name={ name } />
+                <GameTable gameContent={gameContent} params={[name, code, role]} />
                 <StudListJeopardy studList={studList} teacherName={teacherName} className={styles['stud-list']} />
             </div>
             <Footer/>

@@ -23,20 +23,22 @@
     font-weight: 400;
     position: relative;
     padding: 50px 10px 20px 10px;
+    min-width: 130px;
 }
 
-.master-card::before {
-    content: "Ведущий";
-    width: calc(100% - 10px);
-    position: absolute;
-    padding: 5px;
-    border-radius: 17px 17px 0 0;
-    text-align: center;
-    background-color: #64DC97;
-    color: #4E585B;
-    top: 0;
-    left: 0;
-}
+    .master-card::before {
+        content: "Ведущий";
+        width: calc(100% - 10px);
+        position: absolute;
+        padding: 5px;
+        border-radius: 17px 17px 0 0;
+        text-align: center;
+        background-color: #64DC97;
+        color: #4E585B;
+        top: 0;
+        left: 0;
+        min-width: 140px;
+    }
 
 .student-card {
     display: flex;
